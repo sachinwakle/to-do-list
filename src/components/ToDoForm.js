@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { Box, Button } from "@material-ui/core";
+import { saveTask } from "../redux";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +65,19 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 export default function ToDoForm({ setTodoform, todoform }) {
+  const [taskData, setTaskData] = useState(initialTask);
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  const handleTaskFields = (e) => {
+    setTaskData({ ...taskData, [e.target.name]: e.target.value });
+  };
+
+  const handleOnSave = (e) => {
+    e.preventDefault();
+    setTodoform(false);
+    dispatch(saveTask(taskData));
+  };
 
   return (
     <div>
@@ -80,8 +94,14 @@ export default function ToDoForm({ setTodoform, todoform }) {
           Task
         </DialogTitle>
         <DialogContent dividers>
-          <form className={classes.root}>
-            <TextField id="title" label="Title" fullWidth />
+          <form className={classes.root} onSubmit={handleOnSave}>
+            <TextField
+              id="title"
+              label="Title"
+              fullWidth
+              name="title"
+              onChange={handleTaskFields}
+            />
 
             <TextField
               id="contents"
@@ -89,10 +109,12 @@ export default function ToDoForm({ setTodoform, todoform }) {
               multiline
               rows={3}
               fullWidth
+              name="description"
+              onChange={handleTaskFields}
             />
             <Box className={classes.buttonGrp}>
               <Button variant="outlined" color="secondary" type="submit">
-                Submit
+                save
               </Button>
               <Button variant="outlined" color="secondary" type="reset">
                 reset
@@ -104,3 +126,8 @@ export default function ToDoForm({ setTodoform, todoform }) {
     </div>
   );
 }
+
+const initialTask = {
+  title: "",
+  description: "",
+};
