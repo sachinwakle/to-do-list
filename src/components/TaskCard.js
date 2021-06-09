@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -16,20 +16,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TaskCard() {
+export default function TaskCard({ task }) {
   const classes = useStyles();
+  useEffect(() => {
+    console.log("CardTask: ", task);
+  }, []);
+
   return (
     <Card className={classes.root}>
       <CardHeader
-        title="Shrimp and Chorizo Paella"
+        title={task.title} // "Shrimp and Chorizo Paella"
         subheader="September 14, 2016"
       />
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {task.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
