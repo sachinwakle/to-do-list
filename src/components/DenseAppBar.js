@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,6 +18,8 @@ import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import { useDispatch, useSelector } from "react-redux";
+import { requestDarkTheme, requestLightTheme } from "../redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +43,9 @@ export default function DenseAppBar({ setTodoform, todoform }) {
   const barref = createRef();
   const classes = useStyles();
 
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
+  const appTheme = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -81,6 +85,12 @@ export default function DenseAppBar({ setTodoform, todoform }) {
     </div>
   );
 
+  const handleThemeChange = () => {
+    appTheme.isOn
+      ? dispatch(requestDarkTheme())
+      : dispatch(requestLightTheme());
+  };
+
   return (
     <div className={classes.root} ref={barref}>
       <AppBar position="fixed">
@@ -102,9 +112,9 @@ export default function DenseAppBar({ setTodoform, todoform }) {
             className={classes.menuButton}
             aria-label="add"
             size="small"
-            onClick={() => setTodoform(true)}
+            onClick={handleThemeChange}
           >
-            <Brightness4Icon />
+            {appTheme.isOn ? <Brightness4Icon /> : <Brightness7Icon />}
           </Fab>
           <Fab
             color="secondary"
