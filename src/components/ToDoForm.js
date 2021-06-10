@@ -70,7 +70,12 @@ export default function ToDoForm({ setTodoform, todoform }) {
   const classes = useStyles();
 
   const handleTaskFields = (e) => {
-    setTaskData({ ...taskData, [e.target.name]: e.target.value });
+    setTaskData({
+      ...taskData,
+      [e.target.name]: e.target.value,
+      id: Date.now(),
+      updatedOn: new Date().toLocaleString(),
+    });
   };
 
   const handleOnSave = (e) => {
@@ -128,6 +133,8 @@ export default function ToDoForm({ setTodoform, todoform }) {
 }
 
 const initialTask = {
+  id: undefined,
   title: "",
   description: "",
+  updatedOn: "",
 };

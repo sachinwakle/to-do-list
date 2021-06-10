@@ -19,6 +19,8 @@ export default function TaskGrid() {
     console.log("Update Tasks: ", tasks);
   }, [tasks]);
 
+  const descendingOrder = (a, b) => b.id - a.id;
+
   return (
     <div className={classes.root}>
       <Grid
@@ -30,25 +32,14 @@ export default function TaskGrid() {
       >
         {tasks &&
           tasks.data &&
+          tasks.data.sort(descendingOrder) &&
           tasks.data.map((task) => {
             return (
-              <Grid item>
+              <Grid item key={task.id}>
                 <TaskCard task={task} />
               </Grid>
             );
           })}
-        {/* <Grid item>
-          <TaskCard />
-        </Grid>
-        <Grid item>
-          <TaskCard />
-        </Grid>
-        <Grid item>
-          <TaskCard />
-        </Grid>
-        <Grid item>
-          <TaskCard />
-        </Grid> */}
       </Grid>
     </div>
   );
