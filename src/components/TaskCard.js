@@ -20,13 +20,13 @@ export default function TaskCard({ task }) {
   const classes = useStyles();
   useEffect(() => {
     console.log("CardTask: ", task);
-  }, []);
+  }, [task]);
 
   return (
     <Card className={classes.root}>
       <CardHeader
         title={task.title} // "Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        subheader= {task.updatedOn} //"September 14, 2016"
       />
 
       <CardContent>
