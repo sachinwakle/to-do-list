@@ -1,15 +1,17 @@
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import { createRef } from "react";
+import { useSelector } from "react-redux";
 import MainPage from "./components/MainPage";
 
-const theme = createMuiTheme({
-  palette: {
-    type: "dark",
-  },
-});
-
 function App() {
+  const appTheme = useSelector((state) => state.theme);
   const appRef = createRef();
+  const theme = createMuiTheme({
+    palette: {
+      type: appTheme.type,
+    },
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
