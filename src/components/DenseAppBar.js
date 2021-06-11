@@ -110,7 +110,7 @@ export default function DenseAppBar({ setTodoform, todoform }) {
           <Fab
             color="secondary"
             className={classes.menuButton}
-            aria-label="add"
+            aria-label="themeChange"
             size="small"
             onClick={handleThemeChange}
           >

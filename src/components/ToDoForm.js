@@ -81,25 +81,42 @@ export default function ToDoForm({ setTodoform, todoform }) {
   const handleOnSave = (e) => {
     e.preventDefault();
     setTodoform(false);
-    dispatch(saveTask(taskData));
+    if (taskData.title || taskData.description) {
+      dispatch(saveTask(taskData));
+    }
+    setTaskData(initialTask);
+  };
+
+  const handleOnReset = (e) => {
+    setTaskData(initialTask);
   };
 
   return (
     <div>
       <Dialog
-        onClose={() => setTodoform(false)}
+        onClose={() => {
+          setTaskData(initialTask);
+          setTodoform(false);
+        }}
         aria-labelledby="customized-dialog-title"
         open={todoform}
         scroll="body"
       >
         <DialogTitle
           id="customized-dialog-title"
-          onClose={() => setTodoform(false)}
+          onClose={() => {
+            setTaskData(initialTask);
+            setTodoform(false);
+          }}
         >
           Task
         </DialogTitle>
         <DialogContent dividers>
-          <form className={classes.root} onSubmit={handleOnSave}>
+          <form
+            className={classes.root}
+            onSubmit={handleOnSave}
+            onReset={handleOnReset}
+          >
             <TextField
               id="title"
               label="Title"
