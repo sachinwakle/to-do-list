@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TaskGrid() {
   const tasks = useSelector((state) => state.task);
   const classes = useStyles();
+
   useEffect(() => {
     console.log("Update Tasks: ", tasks);
   }, [tasks]);

@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Tooltip from "@material-ui/core/Tooltip";
+import { useDispatch } from "react-redux";
+import { deleteTask } from "../redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,17 +19,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TaskCard({ task }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
   useEffect(() => {
     console.log("CardTask: ", task);
   }, [task]);
 
+  const deleteHandler = (key) => {
+    dispatch(deleteTask(key));
+  };
+
   return (
     <Card className={classes.root}>
-      <CardHeader
-        title={task.title} // "Shrimp and Chorizo Paella"
-        subheader= {task.updatedOn} //"September 14, 2016"
-      />
+      <CardHeader title={task.title} subheader={task.updatedOn} />
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -41,7 +46,10 @@ export default function TaskCard({ task }) {
           </IconButton>
         </Tooltip>
         <Tooltip title="Delete Task" placement="top">
-          <IconButton aria-label="delete">
+          <IconButton
+            aria-label="delete"
+            onClick={() => deleteHandler(task.id)}
+          >
             <DeleteIcon />
           </IconButton>
         </Tooltip>

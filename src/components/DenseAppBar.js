@@ -19,7 +19,7 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useDispatch, useSelector } from "react-redux";
-import { requestDarkTheme, requestLightTheme } from "../redux";
+import { requestDarkTheme, requestLightTheme, deleteAllTasks } from "../redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,7 +66,11 @@ export default function DenseAppBar({ setTodoform, todoform }) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button key={"Tasks"}>
+        <ListItem
+          button
+          key={"Tasks"}
+          onClick={() => dispatch(deleteAllTasks())}
+        >
           <ListItemIcon>
             <ListAltIcon fontSize="large" />
           </ListItemIcon>
