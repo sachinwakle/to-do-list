@@ -10,7 +10,8 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useDispatch } from "react-redux";
-import { deleteTask } from "../redux";
+import { deleteTask, completeTask } from "../redux";
+import RestoreIcon from '@material-ui/icons/Restore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,19 +31,34 @@ export default function TaskCard({ task }) {
     dispatch(deleteTask(key));
   };
 
+  const completeHandler = (key) => {
+    dispatch(completeTask(key));
+  };
+
   return (
     <Card className={classes.root}>
-      <CardHeader title={task.title} subheader={task.updatedOn} />
+      <CardHeader
+        title={task.completed ? <strike>{task.title}</strike> : task.title}
+        subheader={task.updatedOn}
+      />
 
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="p"
+          style={task.completed ? { textDecorationLine: "line-through" } : {}}
+        >
           {task.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Tooltip title="Complete Task" placement="top">
-          <IconButton aria-label="complete">
-            <CheckCircleIcon />
+        <Tooltip title={task.completed ? "Restore Task" : "Complete Task"} placement="top">
+          <IconButton
+            aria-label="complete"
+            onClick={() => completeHandler(task.id)}
+          >
+            {task.completed ? <RestoreIcon /> : <CheckCircleIcon />}
           </IconButton>
         </Tooltip>
         <Tooltip title="Delete Task" placement="top">
