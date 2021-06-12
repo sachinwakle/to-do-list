@@ -154,4 +154,5 @@ const initialTask = {
   title: "",
   description: "",
   updatedOn: "",
+  completed: false,
 };

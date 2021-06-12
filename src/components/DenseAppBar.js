@@ -19,7 +19,7 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useDispatch, useSelector } from "react-redux";
-import { requestDarkTheme, requestLightTheme, deleteAllTasks } from "../redux";
+import { requestDarkTheme, requestLightTheme, deleteAllTasks, completeAllTasks } from "../redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,21 +68,26 @@ export default function DenseAppBar({ setTodoform, todoform }) {
       <List>
         <ListItem
           button
-          key={"Tasks"}
-          onClick={() => dispatch(deleteAllTasks())}
+          key={"Complete Tasks"}
+          onClick={() => dispatch(completeAllTasks())}
         >
           <ListItemIcon>
             <ListAltIcon fontSize="large" />
           </ListItemIcon>
-          <ListItemText primary={"Tasks"} secondary="shows all the tasks" />
+          <ListItemText primary={"Complete"} secondary="mark all tasks complete" />
         </ListItem>
-        <ListItem button key={"Delete Tasks"}>
+
+        <ListItem
+          button
+          key={"Delete Tasks"}
+          onClick={() => dispatch(deleteAllTasks())}
+        >
           <ListItemIcon>
             <DeleteForeverIcon fontSize="large" />
           </ListItemIcon>
           <ListItemText
-            primary={"Delete Tasks"}
-            secondary="deletes all the tasks"
+            primary={"Delete"}
+            secondary="delete all tasks"
           />
         </ListItem>
       </List>

@@ -31,6 +31,34 @@ const taskReducer = (state = initialState, action) => {
         data: [],
       };
 
+    case TASK_COMPLETE: {
+      let completedTasks = state.data.map((task) => {
+        if (task.id === action.key) {
+          return {
+            ...task,
+            completed: !task.completed,
+          };
+        }
+        return task;
+      });
+
+      return {
+        ...state,
+        data: [...completedTasks],
+      };
+    }
+
+    case TASK_COMPLETE_ALL: {
+      let completedTasks = state.data.map((task) => {
+        return { ...task, completed: true };
+      });
+
+      return {
+        ...state,
+        data: [...completedTasks],
+      };
+    }
+
     default:
       return state;
   }
