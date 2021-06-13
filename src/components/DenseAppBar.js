@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-
 import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -19,7 +18,12 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useDispatch, useSelector } from "react-redux";
-import { requestDarkTheme, requestLightTheme, deleteAllTasks, completeAllTasks } from "../redux";
+import {
+  requestDarkTheme,
+  requestLightTheme,
+  deleteAllTasks,
+  completeAllTasks,
+} from "../redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +65,6 @@ export default function DenseAppBar({ setTodoform, todoform }) {
   const list = (anchor) => (
     <div
       className={clsx(classes.list)}
-      role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
@@ -74,7 +77,10 @@ export default function DenseAppBar({ setTodoform, todoform }) {
           <ListItemIcon>
             <ListAltIcon fontSize="large" />
           </ListItemIcon>
-          <ListItemText primary={"Complete"} secondary="mark all tasks complete" />
+          <ListItemText
+            primary={"Complete"}
+            secondary="mark all tasks complete"
+          />
         </ListItem>
 
         <ListItem
@@ -85,10 +91,7 @@ export default function DenseAppBar({ setTodoform, todoform }) {
           <ListItemIcon>
             <DeleteForeverIcon fontSize="large" />
           </ListItemIcon>
-          <ListItemText
-            primary={"Delete"}
-            secondary="delete all tasks"
-          />
+          <ListItemText primary={"Delete"} secondary="delete all tasks" />
         </ListItem>
       </List>
     </div>

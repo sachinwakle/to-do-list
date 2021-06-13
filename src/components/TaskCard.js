@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -11,7 +11,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useDispatch } from "react-redux";
 import { deleteTask, completeTask } from "../redux";
-import RestoreIcon from '@material-ui/icons/Restore';
+import RestoreIcon from "@material-ui/icons/Restore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,10 +22,6 @@ const useStyles = makeStyles((theme) => ({
 export default function TaskCard({ task }) {
   const dispatch = useDispatch();
   const classes = useStyles();
-
-  useEffect(() => {
-    console.log("CardTask: ", task);
-  }, [task]);
 
   const deleteHandler = (key) => {
     dispatch(deleteTask(key));
@@ -53,7 +49,10 @@ export default function TaskCard({ task }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Tooltip title={task.completed ? "Restore Task" : "Complete Task"} placement="top">
+        <Tooltip
+          title={task.completed ? "Undo Task" : "Complete Task"}
+          placement="top"
+        >
           <IconButton
             aria-label="complete"
             onClick={() => completeHandler(task.id)}
