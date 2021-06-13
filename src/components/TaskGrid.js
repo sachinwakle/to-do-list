@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TaskCard from "./TaskCard";
 import { Grid } from "@material-ui/core";
@@ -15,10 +15,6 @@ const useStyles = makeStyles((theme) => ({
 export default function TaskGrid() {
   const tasks = useSelector((state) => state.task);
   const classes = useStyles();
-
-  useEffect(() => {
-    console.log("Update Tasks: ", tasks);
-  }, [tasks]);
 
   const descendingOrder = (a, b) => b.id - a.id;
 
