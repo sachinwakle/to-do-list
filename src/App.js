@@ -9,6 +9,13 @@ function App() {
   const theme = createMuiTheme({
     palette: {
       type: appTheme.type,
+      primary: {
+        main:'#3b5998'
+      },
+      secondary: {
+        main: '#ffc400',
+        contrastText: "#fff",
+      },
     },
   });
 
