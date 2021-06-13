@@ -18,6 +18,7 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useDispatch, useSelector } from "react-redux";
+import TodoIcon from "./TodoIcon";
 import {
   requestDarkTheme,
   requestLightTheme,
@@ -115,6 +116,14 @@ export default function DenseAppBar({ setTodoform, todoform }) {
             onClick={toggleDrawer(true)}
           >
             <MenuIcon />
+          </IconButton>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <TodoIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.title}>
             To-Do List
